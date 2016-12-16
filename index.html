@@ -1,0 +1,98 @@
+<!--pranit bhor-->
+<!--Register form-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Servlet Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="js/jquery.serializeJSON.min.js"></script>
+
+
+
+</head>
+
+<body>
+<div class="jumbotron text-center">
+<h1>School E-Portal</h1>
+  
+
+</div>
+<div class="container">
+<div class="row">
+<div class="col-sm-3"></div>
+<div class="col-sm-5">
+<h3>Enter the Student Details : </h3>
+ <form name="myform" id="myform"> 
+<div class="form-group">
+<label for="fullName">Name:</label>
+<input type="text" name="fullName" class="form-control">
+</div>
+<div class="form-group">
+<label for="email">Email:</label>
+<input type="email" name="email" class="form-control">
+</div>
+<div class="form-group">
+<label for="subject">Subject:</label>
+<input type="text" name="subject" class="form-control">
+</div>
+<div class="form-group">
+<label for="mark">Mark:</label>
+<input type="number" name="mark" class="form-control">
+</form>
+</div>
+
+
+<button type="submit" class="btn btn-success " id="submitform">Submit</button>
+<a href="alldata.html" class="btn btn-info ">Show All Data</a>
+
+<a href="local.html" class="btn btn-warning ">Find Data</a>
+
+<a href="fileupload.html" class="btn btn-danger">Upload File</a>
+
+<a href="update.html" class="btn btn-success">Update</a>
+
+
+
+</div>
+<div class="col-sm-3"></div>
+</div>
+
+<script>
+$(document).ready(function(){
+$("#submitform").click(function(e)
+{
+var MyForm = JSON.stringify($("#myform").serializeJSON());
+console.log(MyForm);
+ $.ajax(
+ {
+ url : "http://192.168.0.29:8080/servlet/studentData",
+ type: "post",
+ data : MyForm,
+ 
+success:function(data,status){
+
+   console.log(data);
+   alert(data.message);//alert ur data here by checking data
+},
+error:function(err){
+   console.log(err);
+   alert(err.message);
+}
+
+ });
+ 
+
+});
+});
+</script>
+
+
+</body>
+</html>
